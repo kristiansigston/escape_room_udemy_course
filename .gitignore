@@ -1,5 +1,14 @@
-intermediate
-Content
-Saved
-.vs
+## Unreal files
+
+Build
 Binaries
+Content/StarterContent/HDRI
+Content/StarterContent/Textures
+DerivedDataCache
+Intermediate
+Saved
+
+## VS and VS Code files
+*.VC.db
+*.suo
+.vs
