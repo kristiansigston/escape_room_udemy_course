@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
 #include "GameFramework/Actor.h"
+#include "Components/PrimitiveComponent.h"
 #include "Engine/TriggerVolume.h"
 #include "OpenDoor.generated.h"
 
@@ -37,6 +38,9 @@ private:
 		float DoorCloseDelay = 0.5f;
 
 	float LastDoorOpenTime;
-	AActor* ActorThatOpens;
+
 	AActor* Owner; //The owning door
+
+	// Return total mass of actors on plate in kg
+	float GetTotalMassOfActorsOnPlate();
 };
