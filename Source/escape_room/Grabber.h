@@ -1,11 +1,14 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+// Copyright Ben Tristem 2016.
 
 #pragma once
 
 #include "CoreMinimal.h"
+#include "Engine/World.h"
 #include "DrawDebugHelpers.h"
 #include "Components/ActorComponent.h"
-#include "Engine/World.h"
+#include "PhysicsEngine/PhysicsHandleComponent.h"
+#include "Components/PrimitiveComponent.h"
+#include "Components/InputComponent.h"
 #include "Grabber.generated.h"
 
 
@@ -18,16 +21,34 @@ public:
 	// Sets default values for this component's properties
 	UGrabber();
 
-protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
-
-public:	
+	
 	// Called every frame
-	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
-private:
+	virtual void TickComponent( float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction ) override;
 
-	// how far ahead of the player can we reach in cm
+
+
+private:
+	// How far ahead of the player can we reach in cm
 	float Reach = 100.f;
-		
+	
+	UPhysicsHandleComponent* PhysicsHandle = nullptr;
+
+	UInputComponent* InputComponent = nullptr;
+
+	// Ray-cast and grab what's in reach
+	void Grab();
+
+	// Called when grab is released
+	void Release();
+
+	// Find (assumed) attached phyics handle
+	void FindPhysicsHandleComponent();
+
+	// Setup (assumed) attached input component
+	void SetupInputComponent();
+
+	// Return hit for first physics body in reach
+	const FHitResult GetFirstPhysicsBodyInReach();
 };
